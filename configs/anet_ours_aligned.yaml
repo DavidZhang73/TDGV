@@ -1,0 +1,121 @@
+data:
+  class_path: src.data_modules.IAWVideoFeatureDataModule
+  init_args:
+    # Dataset
+    dataset_path: data/anet_caption
+    dataset_train_name: train.json
+    dataset_val_name: test.json
+    dataset_test_name: test.json
+    one_step_diagram_per_sample: false
+    # Video
+    video_size: 224
+    video_fps: 25
+    video_encoder: i3d
+    video_dim: 768
+    video_feature_train_name: train_video_{encoder}_{dim}_4auqml8p.pt
+    video_feature_val_name: val_video_{encoder}_{dim}_4auqml8p.pt
+    video_feature_test_name: val_video_{encoder}_{dim}_4auqml8p.pt
+    video_train_sampler:
+      class_path: src.data_modules.IAWVideoFeatureSlideWindowClipSampler
+      init_args:
+        window_size:
+          - 128
+          - 256
+          - 512
+          - 1024
+          - 100000 # 100000 means no sliding window
+        stride:
+          - 32
+          - 64
+          - 128
+          - 256
+          - 512
+        drop_empty_clip: true
+        last_clip_strategy: backpad
+        frames_per_second: 25
+        frames_per_feature: 8.3364928910
+        drop_small_segment_time_threshold: 0.5
+    video_full_sampler:
+      class_path: src.data_modules.IAWVideoFeatureFullVideoClipSampler
+      init_args:
+        frames_per_second: 25
+        frames_per_feature: 8.3364928910
+        drop_small_segment_time_threshold: 0.5
+    # Data Loader
+    batch_size: 16
+    num_workers: 0
+    pin_memory: true
+    drop_last: false
+    shuffle: true
+    prefetch_factor: null
+model:
+  class_path: src.modules.TDGVLightningModule
+  init_args:
+    diagram_pt_pathname: data/anet_caption/text_mean_bert_768_4auqml8p.pt
+    d_video_feature: 768
+    d_diagram_feature: 768
+    d_projection_hidden: 2048
+    p_dropout: 0.1
+    video_fixed_length: 256
+    video_fixed_length_before: true
+    # Transformer
+    d_model: 768
+    n_head: 8
+    n_encoder_layers: 6
+    n_decoder_layers: 6
+    d_feedforward: 2048
+    f_activation: relu
+    decoder_sa_fuse: concat
+    decoder_ca_fuse: concat
+    decoder_diagram_pe_fuse_type: concat_proj
+    decoder_sa_v: concat_proj
+    decoder_ca_v: concat_proj
+    decoder_sa_mask_type: BlockAndSubDiagonalMask
+    use_encoder: false
+    # TDGV
+    n_queries: 3
+    freeze_queries: false
+    # Loss
+    losses:
+      span/l1: 1
+      span/giou: 1
+      background: 1
+    background_losses:
+      CE: 1.0
+    use_background_loss_temperature: true
+    background_loss_temperature_init: 0.07
+    cost_span: 1
+    cost_giou: 1
+    cost_class: 1
+    use_aux: true
+    # Metrics
+    log_enc_self_attention: false
+    log_dec_self_attention: false
+    log_dec_cross_attention: false
+    log_attention_all_layer: false
+    log_attention_key_list: []
+    # Persistence
+    save_training_results: false
+    save_validation_results: true
+    save_testing_results: true
+optimizer:
+  class_path: AdamW
+  init_args:
+    lr: 5e-5
+    weight_decay: 1e-4
+    betas:
+      - 0.9
+      - 0.95
+lr_scheduler:
+  class_path: MultiStepLR
+  init_args:
+    milestones:
+      - 3 # 5e-5
+      - 7 # 2.5e-5
+      - 15 # 1.25e-5
+      - 30 # 6.25e-6
+      - 50 # 3.125e-6
+    gamma: 0.5
+    last_epoch: -1
+trainer:
+  max_epochs: 60

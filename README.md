@@ -1,29 +1,28 @@
 <div align="center">
-
-<h1>Temporal Instructional Diagram Grounding in Unconstrained Videos</h1>
-
-<div>
+  <h1>Temporal Instructional Diagram Grounding in Unconstrained Videos</h1>
+  <div>
     <a href='https://academic.davidz.cn' target='_blank'>Jiahao Zhang<sup>1</sup></a>;
     <a href='https://fredzzhang.com' target='_blank'>Frederic Z. Zhang<sup>2</sup></a>;
     <a href='https://crodriguezo.me' target='_blank'>Cristian Rodriguez<sup>2</sup></a>;
     <a href='https://www.itzikbs.com' target='_blank'>Yizhak Ben-Shabat<sup>1,3</sup></a>;
     <a href='https://users.cecs.anu.edu.au/~cherian' target='_blank'>Anoop Cherian<sup>4</sup></a>;
     <a href='https://users.cecs.anu.edu.au/~sgould' target='_blank'>Stephen Gould<sup>1</sup></a>
-</div>
-<sup>1</sup>The Australian National University
-<sup>2</sup>The Australian Institute for Machine Learning
-<sup>3</sup>Technion Israel Institute of Technology
-<sup>4</sup>Mitsubishi Electric Research Labs
-
-<br>
-
-<div>
+  </div>
+  <sup>1</sup>The Australian National University
+  <sup>2</sup>The Australian Institute for Machine Learning
+  <br>
+  <sup>3</sup>Technion Israel Institute of Technology
+  <sup>4</sup>Mitsubishi Electric Research Labs
+  <br>
+  <div>
     <a href='https://arxiv.org/abs/2407.12066' target='_blank'><img alt="ArXiv" src='https://img.shields.io/badge/Paper-Arxiv-red'></a>
     <a href="https://github.com/DavidZhang73/pytorch-lightning-template"><img alt="template" src="https://img.shields.io/badge/-Pytorch--Lightning--Template-017F2F?style=flat&logo=github&labelColor=gray"></a>
     <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT"></a>
+  </div>
 </div>
+<br>
 
-</div>
+![Teaser](imgs/teaser.svg)
 
 ## Abstract
 

@@ -14,6 +14,7 @@
   <sup>3</sup>Technion Israel Institute of Technology
   <sup>4</sup>Mitsubishi Electric Research Labs
   <br>
+  <br>
   <div>
     <a href='https://arxiv.org/abs/2407.12066' target='_blank'><img alt="ArXiv" src='https://img.shields.io/badge/Paper-Arxiv-red'></a>
     <a href="https://github.com/DavidZhang73/pytorch-lightning-template"><img alt="template" src="https://img.shields.io/badge/-Pytorch--Lightning--Template-017F2F?style=flat&logo=github&labelColor=gray"></a>
